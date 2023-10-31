@@ -1,8 +1,8 @@
-create table carros(
+create table cars(
 id serial primary key,
-marca text,
-modelo text,
-ano integer,
-cor text,
-valor integer
+brand text,
+model text,
+yearCar integer,
+collor text,
+price integer
 );
