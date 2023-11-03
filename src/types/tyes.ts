@@ -5,4 +5,12 @@ export type Car = {
   yearcar: number;
   collor: string;
   price: number;
+  user_id: number;
+};
+
+export type User = {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
 };
