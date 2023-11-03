@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { knex } from "../database/conextion";
 import { User } from "../types/tyes";
 import jwt from "jsonwebtoken";
+import JWT_PASS from "../../env";
 
 export const createUser = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
