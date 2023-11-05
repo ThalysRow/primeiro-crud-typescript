@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { knex } from "../database/conextion";
-import { User } from "../types/tyes";
+import { User } from "../types/types";
 interface CustomRequest extends Request {
   userId?: number; // Adicione a propriedade 'userId' ao Request
 }

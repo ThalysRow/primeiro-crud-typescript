@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { knex } from "../database/conextion";
-import { Car } from "../types/tyes";
+import { Car } from "../types/types";
 
 export const listCars = async (_: Request, res: Response) => {
   try {

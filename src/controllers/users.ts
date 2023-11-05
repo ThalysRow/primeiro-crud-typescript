@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { knex } from "../database/conextion";
-import { User } from "../types/tyes";
+import { User } from "../types/types";
 import jwt from "jsonwebtoken";
 import JWT_PASS from "../../env";
 

@@ -14,3 +14,8 @@ export type User = {
   email: string;
   password: string;
 };
+
+export type schemaLogin = {
+  email: string;
+  password: string;
+};
