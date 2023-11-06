@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { schemaLogin } from "../types/types";
+import { SchemaNewUser } from "../types/types";
 
-export const validateBodyLogin =
-  (schema: schemaLogin) =>
+export const validateBody =
+  (schema: SchemaNewUser) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       await schema.validateAsync(req.body);

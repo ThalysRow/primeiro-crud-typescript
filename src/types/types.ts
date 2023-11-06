@@ -15,7 +15,9 @@ export type User = {
   password: string;
 };
 
-export type schemaLogin = {
+export type SchemaNewUser = {
+  validateAsync: any;
+  name: string;
   email: string;
   password: string;
 };
