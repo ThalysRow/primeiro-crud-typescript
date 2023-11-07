@@ -4,14 +4,20 @@ import { knex } from "../database/conextion";
 import { User } from "../types/types";
 import jwt from "jsonwebtoken";
 import JWT_PASS from "../../env";
+import { findUser, formateData } from "../utils/functions";
 
 export const createUser = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
 
   try {
     const encryptedPass = await bcrypt.hash(password, 10);
+    const formatadeName = formateData(name);
 
-    await knex<User>("users").insert({ name, email, password: encryptedPass });
+    await knex<User>("users").insert({
+      name: formatadeName,
+      email,
+      password: encryptedPass,
+    });
 
     return res.status(201).json({ message: "user created" });
   } catch (error) {
@@ -20,29 +26,17 @@ export const createUser = async (req: Request, res: Response) => {
 };
 
 export const loginUser = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const { email } = req.body;
 
   try {
-    const findUser = await knex<User>("users").where("email", email).first();
+    const user = await findUser(email);
+    const userId = user!.id;
 
-    if (!findUser) {
-      return res.status(400).json({ message: "invalid email or password" });
-    }
-
-    const passUser = findUser.password;
-    const idUser = findUser.id;
-
-    const passCompare = await bcrypt.compare(password, passUser);
-
-    if (!passCompare) {
-      return res.status(400).json({ message: "invalid email or password" });
-    }
-
-    const token = jwt.sign({ id: idUser }, process.env.JWT_PASS, {
+    const token = jwt.sign({ id: userId }, process.env.JWT_PASS, {
       expiresIn: 60 * 10,
     });
 
-    const { password: _, ...userInfo } = findUser;
+    const { password: _, ...userInfo } = user!;
 
     return res.json({ userInfo, token });
   } catch (error) {

@@ -26,7 +26,9 @@ export const newUser: any = joi.object({
     .required()
     .custom((pass, res) => {
       if (pass.trim() === "") {
-        return res.message({ message: "Format passowrd invalid" });
+        return res.message({ message: "Format password invalid" });
+      } else if (pass.includes(" ")) {
+        return res.message({ message: "Format password invalid" });
       }
       return pass;
     })

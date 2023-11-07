@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { knex } from "../database/conextion";
 import { Car } from "../types/types";
+import { findCar } from "../utils/functions";
 
-export const listCars = async (_: Request, res: Response) => {
+export const listCars = async (res: Response) => {
   try {
     const result = await knex<Car>("cars");
     return res.status(200).json(result);
@@ -14,7 +15,7 @@ export const listCars = async (_: Request, res: Response) => {
 export const detailCar = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const car = await knex<Car>("cars").where("id", id).first();
+    const car = await findCar(Number(id));
     return res.status(200).json(car);
   } catch (error) {
     return res.status(500).json({ message: "Error in detail car." });
