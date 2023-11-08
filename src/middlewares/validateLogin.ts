@@ -7,7 +7,7 @@ export const validateLogin = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { email, passowrd } = req.body;
+  const { email, password } = req.body;
   try {
     const user = await findUser(email);
 
@@ -17,13 +17,14 @@ export const validateLogin = async (
 
     const pass = user!.password;
 
-    const passCompare = await bcrypt.compare(passowrd, pass);
+    const passCompare = await bcrypt.compare(password, pass);
 
     if (!passCompare) {
       return res.status(400).json({ message: "invalid email or password" });
     }
     next();
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: "Erro in validate login" });
   }
 };

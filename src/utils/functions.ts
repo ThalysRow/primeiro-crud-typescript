@@ -13,9 +13,9 @@ export const formateData = (data: string): string => {
   const formatade = [];
 
   for (let i = 0; i < array.length; i++) {
-    if (array[i] !== " ") {
+    if (array[i] && array[i] !== " ") {
       formatade.push(
-        (array[i] = array[0].toUpperCase() + array[i].slice(1).toLowerCase())
+        (array[i] = array[i][0].toUpperCase() + array[i].slice(1).toLowerCase())
       );
     }
   }

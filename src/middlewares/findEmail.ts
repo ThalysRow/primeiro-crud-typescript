@@ -10,7 +10,7 @@ export const findEmail = async (
   const { email } = req.body;
 
   try {
-    const result = await knex<User>("user").where("email", email).first();
+    const result = await knex<User>("users").where("email", email).first();
     if (result) {
       return res.status(400).json({ message: "This email is already in use" });
     }
