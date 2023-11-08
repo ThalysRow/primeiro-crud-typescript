@@ -1,9 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import { knex } from "../database/conextion";
 import { User } from "../types/types";
+interface CustomRequest extends Request {
+  userId?: number;
+}
 
 export const findEmail = async (
-  req: Request,
+  req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
@@ -11,7 +14,7 @@ export const findEmail = async (
 
   try {
     const result = await knex<User>("users").where("email", email).first();
-    if (result) {
+    if (result && result.id !== req.userId) {
       return res.status(400).json({ message: "This email is already in use" });
     }
 
