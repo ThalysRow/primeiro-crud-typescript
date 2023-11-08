@@ -102,10 +102,4 @@ export const newCar: any = joi.object({
     "number.integer": "Insert only numbers integers in price",
     "any.required": "The price field is mandatory",
   }),
-  // user_id: joi.number().required().integer().positive().messages({
-  //   "any.required": "The user_id field is mandatory",
-  //   "number.base": "Only numbers",
-  //   "number.positive": "Only positives numbers",
-  //   "number.integer": "Only integers numbers",
-  // }),
 });

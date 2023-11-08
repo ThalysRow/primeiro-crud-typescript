@@ -14,6 +14,4 @@ app.use(authentication);
 
 app.use(routesCars);
 
-app.listen(process.env.PORT, () => {
-  console.log("Servidor iniciado na porta 3000");
-});
+app.listen(process.env.PORT);

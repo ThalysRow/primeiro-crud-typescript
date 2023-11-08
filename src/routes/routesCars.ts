@@ -12,7 +12,7 @@ import { newCar } from "../config/schema";
 const routesCars = Router();
 
 routesCars.get("/cars", listCars);
-routesCars.get("/car/:id", verifyCar, detailCar);
+routesCars.get("/cars/:id", verifyCar, detailCar);
 
 routesCars.post("/cars", validateBody(newCar), createCar);
 routesCars.post("/cars/:id", verifyCar, validateBody(newCar), updateCar);

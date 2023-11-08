@@ -47,7 +47,14 @@ export const updateCar = async (req: CustomRequest, res: Response) => {
   const { brand, model, yearcar, collor, price } = req.body;
   try {
     await knex<Car>("cars")
-      .update({ brand, model, yearcar, collor, price, user_id: req.userId })
+      .update({
+        brand: formateData(brand),
+        model: formateData(model),
+        yearcar,
+        collor: formateData(collor),
+        price,
+        user_id: req.userId,
+      })
       .where("id", id);
     return res.status(204).send();
   } catch (error) {
